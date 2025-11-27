@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f1419;
+    color: #333;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* ========== STARFIELD CANVAS ========== */
+#starfield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Hide starfield on mobile and tablet */
+@media (max-width: 768px) {
+    #starfield {
+        display: none;
+    }
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+}
+
+/* ========== RESPONSIVE NAVBAR ========== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #1a1f2e 0%, #2d3748 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+}
+
+.navbar-container {
+    max-width: 100%;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-brand {
+    text-align: center;
+}
+
+.navbar-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-desc {
+    font-size: 0.77rem;
+    color: #a0aec0;
+    margin: 4px 0 0 0;
+    padding: 0;
+    font-weight: 500;
+}
+
+/* Mobile navbar - compact version */
+@media (max-width: 480px) {
+    .navbar-container {
+        padding: 10px 16px;
+    }
+    
+    .navbar-title {
+        font-size: 1.1rem;
+    }
+    
+    .navbar-desc {
+        font-size: 0.7rem;
+    }
+}
+
+/* ========== CHAT WRAPPER ========== */
+.chat-wrapper {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #f8f9ff 0%, #f0f4ff 100%);
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .chat-wrapper {
+        top: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-wrapper {
+        top: 75px;
+    }
+}
+
+/* ========== CHAT CONTAINER ========== */
+.chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.chat-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.3);
+    border-radius: 4px;
+}
+
+.chat-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.6);
+}
+
+/* ========== MESSAGE WRAPPER & STYLING ========== */
+.message-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.user-wrapper {
+    justify-content: flex-end;
+}
+
+.bot-wrapper {
+    justify-content: flex-start;
+}
+
+.message-avatar {
+    font-size: 1.5rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.message-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 75%;
+}
+
+.user-wrapper .message-group {
+    align-items: flex-end;
+}
+
+.bot-wrapper .message-group {
+    align-items: flex-start;
+}
+
+.message {
+    padding: 10px 14px;
+    border-radius: 16px;
+    word-wrap: break-word;
+    line-height: 1.4;
+    font-size: 0.95rem;
+}
+
+.user-message {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px 4px 16px 16px;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.bot-message {
+    background: #ffffff;
+    border-radius: 4px 16px 16px 16px;
+    color: #2d3748;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.message-timestamp {
+    font-size: 0.7rem;
+    color: #a0aec0;
+    padding: 0 4px;
+}
+
+/* ========== INPUT AREA ========== */
+.input-area {
+    display: flex;
+    gap: 10px;
+    padding: 16px 20px;
+    background: linear-gradient(180deg, #f8f9ff 0%, #f0f4ff 100%);
+    border-top: 1px solid rgba(102, 126, 234, 0.1);
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#user-input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 24px;
+    font-size: 0.95rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background: #ffffff;
+}
+
+#user-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+#user-input::placeholder {
+    color: #cbd5e0;
+}
+
+#send-btn {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+#send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+#send-btn:active {
+    transform: translateY(0);
+}
+
+/* ========== MOBILE INPUT ADJUSTMENTS ========== */
+@media (max-width: 480px) {
+    .input-area {
+        padding: 10px 12px;
+        gap: 6px;
+    }
+    
+    #user-input {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+    
+    #send-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .message-group {
+        max-width: 85%;
+    }
+    
+    .message-avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 1.2rem;
+    }
+}
+
+/* ========== TABLET ADJUSTMENTS ========== */
+@media (max-width: 768px) and (min-width: 481px) {
+    .message-group {
+        max-width: 80%;
+    }
+}
